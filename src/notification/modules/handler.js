@@ -1,0 +1,53 @@
+/**
+ * Defining methods for updating state based on the payload within action object
+ *
+ * @version 1.0.0
+ * @author [Phat Tran Hong Dai](https://github.com/sapegin)
+ * Vietnamese-German University
+ * Year:2020
+ */
+
+//``` Importing action type which is declared in actions.js file
+import {
+    NOTIFICATION_DATA,
+    SUCCESS,
+    PENDING,
+    ERROR
+} from "./actions"
+
+import update from "immutability-helper"
+
+//``` Defining methods for updating state based on action type 
+export const actionHandlers = {};
+actionHandlers[NOTIFICATION_DATA] = handleNotificationData;
+actionHandlers[SUCCESS] = handleSuccess;
+actionHandlers[PENDING] = handlePending;
+actionHandlers[ERROR] = handleError
+
+
+//''' Definging function for updating state. Each function receive a previous state and an 
+//action object as parameter then return a new state by updating the previous state based on
+// action's payload
+function handleNotificationData(state, action) {
+    return update(state, {
+        notificationData: { $set: action.payload }
+    })
+}
+
+function handleSuccess(state, action) {
+    return update(state, {
+        success: { $set: action.payload }
+    })
+}
+
+function handlePending(state, action) {
+    return update(state, {
+        pending: { $set: action.payload }
+    })
+}
+
+function handleError(state, action) {
+    return update(state, {
+        error: { $set: action.payload }
+    })
+}
